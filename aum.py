@@ -75,10 +75,7 @@ finally:
     driver.quit()
 
 # Use the scraped date 
-try:
-    current_date = datetime.strptime(time_9008, '%d %b %Y').strftime('%-d/%-m/%Y') if time_9008 != "N/A" else "Unknown Date"
-except ValueError:
-    current_date = "Unknown Date"
+current_date = datetime.strptime(time_9008, '%d %b %Y').strftime('%-d/%-m/%Y') if time_9008 != "N/A" else "Unknown Date"
 
 # Check and replace "N/A" values with the previous day's value
 if aum_9008 == "N/A":
