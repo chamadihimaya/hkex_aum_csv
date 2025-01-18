@@ -6,7 +6,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
-from datetime import datetime
 import pandas as pd
 import os
 import logging
@@ -75,7 +74,7 @@ finally:
     driver.quit()
 
 # Use the scraped date 
-current_date = datetime.strptime(time_9008, '%d %b %Y').strftime('%-d/%-m/%Y') if time_9008 != "N/A" else "Unknown Date"
+current_date = time_9008 if time_9008 != "N/A" else "Unknown Date"
 
 # Check and replace "N/A" values with the previous day's value
 if aum_9008 == "N/A":
