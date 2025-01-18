@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
+from datetime import datetime
 import pandas as pd
 import os
 import logging
@@ -43,7 +44,9 @@ def get_aum_and_time(sym):
 
         # Extract update time
         time_element = soup.find('dt', {'class': 'ico_data col_aum_date'})
-        update_time = time_element.text.strip().replace("as at ", "") if time_element else "N/A"
+        update_time = time_element.text.strip().replace("as at ", "").replace("(", "").replace(")", "") if time_element else "N/A"
+        if update_time != "N/A":
+            update_time = datetime.strptime(update_time, "%d %b %Y").strftime("%d-%m-%Y")
 
         return aum_value, update_time
     except Exception as e:
